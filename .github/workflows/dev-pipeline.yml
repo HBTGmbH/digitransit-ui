@@ -85,7 +85,7 @@ jobs:
   #           './manifest.json'
   #         key: ${{ runner.os }}-build-${{ github.run_id }}
   publish-npm:
-    if: github.ref == 'refs/heads/v2'
+    if: github.ref == 'refs/heads/v2-trufi'
     needs:
       - lint
       - unit-test
@@ -123,13 +123,13 @@ jobs:
         run: echo ::set-output name=published-packages::$(echo "${{ steps.publish.outputs.publish-logs }}" | grep -o -P '(Successfully published:).*')
         shell: bash
         id: log-parse
-      - name: Send published packages to slack
-        if:  steps.log-parse.outputs.published-packages != ''
-        run: ./.github/workflows/scripts/slack_message.sh
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          PUBLISHED_PACKAGES: ${{ steps.log-parse.outputs.published-packages }}
-        shell: bash
+#      - name: Send published packages to slack
+#        if:  steps.log-parse.outputs.published-packages != ''
+#        run: ./.github/workflows/scripts/slack_message.sh
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          PUBLISHED_PACKAGES: ${{ steps.log-parse.outputs.published-packages }}
+#        shell: bash
 
   docker-push:
     if: github.ref == 'refs/heads/v2'
