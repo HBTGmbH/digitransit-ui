@@ -13,12 +13,12 @@ jobs:
       matrix:
         node-version: [10.x]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: "Set time zone to Europe/Berlin"
         uses: zcong1993/setup-timezone@master
         with:
@@ -39,12 +39,12 @@ jobs:
       matrix:
         node-version: [10.x]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: "Set time zone to Europe/Berlin"
         uses: zcong1993/setup-timezone@master
         with:
@@ -102,11 +102,11 @@ jobs:
       matrix:
         node-version: [ 10.x ]
     steps:
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - uses: actions/checkout@v2
       - name: Set time zone to Europe/Berlin
         uses: zcong1993/setup-timezone@master
         with:
