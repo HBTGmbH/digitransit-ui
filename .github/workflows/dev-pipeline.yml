@@ -1,11 +1,11 @@
-name: Process v2 push or pr
+name: Process v2-trufi push or pr
 on:
   push:
     branches:
-      - v2
+      - v2-trufi
   pull_request:
     branches:
-      - v2
+      - v2-trufi
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -15,10 +15,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: "Set time zone to Europe/Helsinki"
+      - name: "Set time zone to Europe/Berlin"
         uses: zcong1993/setup-timezone@master
         with:
-          timezone: "Europe/Helsinki"
+          timezone: "Europe/Berlin"
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -37,10 +37,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: "Set time zone to Europe/Helsinki"
+      - name: "Set time zone to Europe/Berlin"
         uses: zcong1993/setup-timezone@master
         with:
-          timezone: "Europe/Helsinki"
+          timezone: "Europe/Berlin"
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -95,10 +95,10 @@ jobs:
         node-version: [ 10.x ]
     steps:
       - uses: actions/checkout@v2
-      - name: Set time zone to Europe/Helsinki
+      - name: Set time zone to Europe/Berlin
         uses: zcong1993/setup-timezone@master
         with:
-          timezone: "Europe/Helsinki"
+          timezone: "Europe/Berlin"
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -141,10 +141,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Set time zone to Europe/Helsinki
+      - name: Set time zone to Europe/Berlin
         uses: zcong1993/setup-timezone@master
         with:
-          timezone: "Europe/Helsinki"
+          timezone: "Europe/Berlin"
       - name: Build docker image from v2 and push it
         run: ./.github/workflows/scripts/build_and_push_dev.sh
         env:
