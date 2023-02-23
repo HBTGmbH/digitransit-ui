@@ -132,7 +132,7 @@ jobs:
 #        shell: bash
 
   docker-push:
-    if: github.ref == 'refs/heads/v2'
+    if: github.ref == 'refs/heads/v2-trufi'
     needs:
       - lint
       - publish-npm
