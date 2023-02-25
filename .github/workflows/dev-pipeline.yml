@@ -144,6 +144,9 @@ jobs:
 #        shell: bash
 
   docker-push:
+    permissions:
+      id-token: write # required to use OIDC authentication
+      contents: read # required to checkout the code from the repo
     if: github.ref == 'refs/heads/v2-trufi'
     needs:
       - lint
@@ -160,8 +163,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::313329311652:role/PushContainerImagesGithubActions
+          role-duration-seconds: 900 # the ttl of the session, in seconds.
           aws-region: eu-central-1
       - name: Login to Amazon ECR
         id: login-ecr
