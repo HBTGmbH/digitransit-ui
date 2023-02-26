@@ -14,9 +14,18 @@ jobs:
         uses: zcong1993/setup-timezone@master
         with:
           timezone: "Europe/Berlin"
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::313329311652:role/PushContainerImagesGithubActions
+          role-duration-seconds: 900 # the ttl of the session, in seconds.
+          aws-region: eu-central-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
       - name: Build docker image from next and push it
         run: ./.github/workflows/scripts/build_and_push_dev.sh
         env:
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
-          DOCKER_AUTH: ${{ secrets.DOCKER_AUTH }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: hbt/digitransit-ui
           DOCKER_BASE_TAG: hotfix
