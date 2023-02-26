@@ -5,7 +5,7 @@ const CONFIG = 'sw';
 const APP_TITLE = 'Verbindungsauskunft';
 const APP_DESCRIPTION = 'Verbindungsauskunft - Schweinfurt';
 const API_URL = process.env.API_URL || 'https://otp-sw-staging.sandbox.aws.hbt.de';
-const MAP_URL = process.env.MAP_URL || 'https://{s}.tile.openstreetmap.de/';
+const MAP_URL = process.env.MAP_URL || 'https://osm-demo-{s}.wheregroup.com/tiles/1.0.0/osm/webmercator/';
 
 const walttiConfig = require('./config.waltti').default;
 
@@ -22,6 +22,9 @@ export default configMerger(walttiConfig, {
   URL: {
     OTP: process.env.OTP_URL || `${API_URL}/otp/routers/default/`,
     MAP_URL,
+    MAP: {
+      default: MAP_URL,
+    }
   },
 
   colors: {
