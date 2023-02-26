@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: digitransit
+    project: sw
+  name: digitransit
+  namespace: sw-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: digitransit
+      project: sw
+  strategy:
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: digitransit
+        project: sw
+    spec:
+      tolerations:
+        - key: eks.amazonaws.com/compute-type
+          value: fargate
+          operator: Equal
+          effect: NoSchedule
+      containers:
+        - image: 313329311652.dkr.ecr.eu-central-1.amazonaws.com/hbt/digitransit-ui
+          name: digitransit-ui
+          resources:
+            requests:
+              cpu: 500m
+              memory: 4Gi
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: CONFIG
+              value: sw
+            - name: NODE_ENV
+              value: production
+            - name: OTP_URL
+              value: https://otp-sw-staging.sandbox.aws.hbt.de/otp/routers/default/
