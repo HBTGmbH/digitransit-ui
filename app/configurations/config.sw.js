@@ -46,7 +46,7 @@ export default configMerger(walttiConfig, {
 
   textLogo: true,
 
-  feedIds: ['SW'],
+  feedIds: ['1'],
 
   searchParams: {
     'boundary.rect.min_lat': minLat,
