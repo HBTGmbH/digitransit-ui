@@ -1,20 +1,18 @@
 /* eslint-disable */
-import configMerger from '../util/configMerger';
 
 const CONFIG = 'sw';
 const APP_TITLE = 'Verbindungsauskunft';
 const APP_DESCRIPTION = 'Verbindungsauskunft - Schweinfurt';
 const API_URL = process.env.API_URL || 'https://otp-sw-staging.sandbox.aws.hbt.de';
 const MAP_URL = process.env.MAP_URL || 'https://osm-demo-{s}.wheregroup.com/tiles/1.0.0/osm/webmercator/';
-
-const defaultConfig = require('./config.default').default;
+const YEAR = 1900 + new Date().getYear();
 
 const minLat = 50.018715;
 const maxLat = 50.044273;
 const minLon = 10.148706;
 const maxLon = 10.312042;
 
-export default configMerger(defaultConfig, {
+export default {
   CONFIG,
 
   appBarLink: { name: 'Stadtwerke Schweinfurt', href: 'https://www.stadtwerke-sw.de' },
@@ -83,7 +81,7 @@ export default configMerger(defaultConfig, {
   },
 
   menu: {
-    copyright: { label: `© Stadtwerke Schweinfurt ${defaultConfig.YEAR}` },
+    copyright: { label: `© Stadtwerke Schweinfurt ${YEAR}` },
     content: [
       {
         name: 'Impressum',
@@ -116,4 +114,4 @@ export default configMerger(defaultConfig, {
       },
     ],
   },
-});
+};

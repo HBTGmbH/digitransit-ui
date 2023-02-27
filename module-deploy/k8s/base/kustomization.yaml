@@ -11,3 +11,11 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: digitransit-config
+    files:
+      - config.sw.js

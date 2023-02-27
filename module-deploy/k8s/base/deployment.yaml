@@ -22,6 +22,10 @@ spec:
         app: digitransit
         project: sw
     spec:
+      volumes:
+        - name: config
+          configMap:
+            name: digitransit-config
       tolerations:
         - key: eks.amazonaws.com/compute-type
           value: fargate
@@ -30,6 +34,10 @@ spec:
       containers:
         - image: 313329311652.dkr.ecr.eu-central-1.amazonaws.com/hbt/digitransit-ui
           name: digitransit-ui
+          volumeMounts:
+            - mountPath: /opt/digitransit-ui/app/configurations/config.sw.js
+              name: config
+              subPath: config.sw.js  
           resources:
             requests:
               cpu: 500m
