@@ -7,14 +7,14 @@ const APP_DESCRIPTION = 'Verbindungsauskunft - Schweinfurt';
 const API_URL = process.env.API_URL || 'https://otp-sw-staging.sandbox.aws.hbt.de';
 const MAP_URL = process.env.MAP_URL || 'https://osm-demo-{s}.wheregroup.com/tiles/1.0.0/osm/webmercator/';
 
-const walttiConfig = require('./config.waltti').default;
+const defaultConfig = require('./config.default').default;
 
 const minLat = 50.018715;
 const maxLat = 50.044273;
 const minLon = 10.148706;
 const maxLon = 10.312042;
 
-export default configMerger(walttiConfig, {
+export default configMerger(defaultConfig, {
   CONFIG,
 
   appBarLink: { name: 'Stadtwerke Schweinfurt', href: 'https://www.stadtwerke-sw.de' },
@@ -59,6 +59,10 @@ export default configMerger(walttiConfig, {
     useRetinaTiles: true,
     tileSize: 256,
     zoomOffset: 0,
+    areaBounds: {
+      corner1: [50.095697, 10.393410],
+      corner2: [49.993505, 10.066738],
+    }
   },
 
   themeMap: {
@@ -79,7 +83,7 @@ export default configMerger(walttiConfig, {
   },
 
   menu: {
-    copyright: { label: `© Stadtwerke Schweinfurt ${walttiConfig.YEAR}` },
+    copyright: { label: `© Stadtwerke Schweinfurt ${defaultConfig.YEAR}` },
     content: [
       {
         name: 'Impressum',
